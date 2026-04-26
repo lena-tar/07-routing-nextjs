@@ -8,6 +8,7 @@ interface PageProps {
 
 export default async function NoteModalPage({ params }: PageProps) {
   const { id } = await params;
+  console.log("Modal id:", id);
   const note = await fetchNoteById(id);
 
   return (
