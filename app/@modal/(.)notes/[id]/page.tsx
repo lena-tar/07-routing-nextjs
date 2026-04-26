@@ -4,7 +4,6 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { fetchNoteById } from "@/lib/api";
-import Modal from "@/components/Modal/Modal";
 import NotePreviewClient from "./NotePreview.client";
 
 interface PageProps {
@@ -23,9 +22,7 @@ export default async function NoteModalPage({ params }: PageProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Modal>
-        <NotePreviewClient />
-      </Modal>
+      <NotePreviewClient id={id} />
     </HydrationBoundary>
   );
 }

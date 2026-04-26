@@ -14,15 +14,16 @@ axios.defaults.headers.common["Authorization"] =
 export const fetchNotes = async (
   page: number,
   searchQuery: string,
+  tag?: string,
 ): Promise<FetchNotesResponse> => {
   const res = await axios.get<FetchNotesResponse>("/notes", {
     params: {
       page,
       perPage: 12,
       search: searchQuery || undefined,
+      tag: tag || undefined,
     },
   });
-
   return res.data;
 };
 
@@ -39,15 +40,4 @@ export const deleteNote = async (noteId: string): Promise<Note> => {
 export const fetchNoteById = async (id: string): Promise<Note> => {
   const res = await axios.get<Note>(`/notes/${id}`);
   return res.data;
-};
-
-export const fetchNotesByTag = async (tag?: string): Promise<Note[]> => {
-  const res = await axios.get<FetchNotesResponse>("/notes", {
-    params: {
-      tag: tag || undefined,
-      page: 1,
-      perPage: 12,
-    },
-  });
-  return res.data.notes;
 };
