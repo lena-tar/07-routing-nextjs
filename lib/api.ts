@@ -42,20 +42,12 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
 };
 
 export const fetchNotesByTag = async (tag?: string): Promise<Note[]> => {
-  const res = await axios
-    .get<FetchNotesResponse>("/notes", {
-      params: {
-        tag: tag || undefined,
-        page: 1,
-        perPage: 12,
-      },
-    })
-    .catch((err) => {
-      console.log(
-        "VALIDATION ERROR:",
-        JSON.stringify(err.response?.data, null, 2),
-      );
-      throw err;
-    });
+  const res = await axios.get<FetchNotesResponse>("/notes", {
+    params: {
+      tag: tag || undefined,
+      page: 1,
+      perPage: 12,
+    },
+  });
   return res.data.notes;
 };
