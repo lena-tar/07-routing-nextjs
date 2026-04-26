@@ -7,12 +7,19 @@ import { useRouter } from "next/navigation";
 
 interface ModalProps {
   children: React.ReactNode;
+  onClose?: () => void;
 }
 
-export default function Modal({ children }: ModalProps) {
+export default function Modal({ children, onClose }: ModalProps) {
   const router = useRouter();
 
-  const handleClose = () => router.back();
+  const handleClose = () => {
+    if (onClose) {
+      onClose();
+    } else {
+      router.back();
+    }
+  };
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
